@@ -1,0 +1,6 @@
+@TopicsInCs.Demo.Web_HostAddress = http://localhost:5026
+
+GET {{TopicsInCs.Demo.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
