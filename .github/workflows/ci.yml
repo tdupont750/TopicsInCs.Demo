@@ -1,0 +1,65 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main # Trigger the action on pushes to the main branch
+  pull_request:
+    branches:
+      - main # Trigger the action on pull requests to the main branch
+
+jobs:
+
+  console:
+    name: Console App
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Setup .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' # Adjust the .NET version based on your project
+
+    # Step 3: Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore ./src/TopicsInCs.Demo.Console/TopicsInCs.Demo.Console.csproj
+
+    # Step 4: Build the project
+    - name: Build
+      run: dotnet build ./src/TopicsInCs.Demo.Console/TopicsInCs.Demo.Console.csproj --no-restore --configuration Release
+
+    # Step 5: Run unit tests
+    - name: Run unit tests
+      run: dotnet test ./src/TopicsInCs.Demo.Tests/TopicsInCs.Demo.Tests.csproj
+
+  web:
+    name: Web App
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Setup .NET
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' # Adjust the .NET version based on your project
+
+    # Step 3: Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore ./src/TopicsInCs.Demo.Web/TopicsInCs.Demo.Web.csproj
+
+    # Step 4: Build the project
+    - name: Build
+      run: dotnet build ./src/TopicsInCs.Demo.Web/TopicsInCs.Demo.Web.csproj --no-restore --configuration Release
+
+    # Step 5: Run unit tests
+    - name: Run unit tests
+      run: dotnet test ./src/TopicsInCs.Demo.Web.Tests/TopicsInCs.Demo.Web.Tests.csproj
