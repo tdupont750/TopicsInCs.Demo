@@ -4,9 +4,9 @@ namespace TopicsInCs.Demo.Social;
 
 public class FriendListService
 {
-    private readonly IDatabaseService<List<Friend>> _databaseService;
+    private readonly IDatabaseService _databaseService;
 
-    public FriendListService(IDatabaseService<List<Friend>> databaseService)
+    public FriendListService(IDatabaseService databaseService)
     {
         _databaseService = databaseService;
     }
@@ -55,7 +55,7 @@ public class FriendListService
 
     private List<Friend> LoadAll()
     {
-        var allFriends = _databaseService.Load();
+        var allFriends = _databaseService.LoadFriends();
         
         if (allFriends == null)
             return new List<Friend>();
@@ -65,6 +65,6 @@ public class FriendListService
 
     private void SaveAll(List<Friend> friends)
     {
-        _databaseService.Save(friends);
+        _databaseService.SaveFriends(friends);
     }
 }

@@ -21,7 +21,7 @@ public static class Program
     public static WebApplication BuildWebApplication(
         string[] args,
         string url,
-        IDatabaseService<List<Friend>> databaseService = null)
+        IDatabaseService databaseService = null)
     {
         var builder = WebApplication.CreateBuilder(args);
         
@@ -36,7 +36,7 @@ public static class Program
 
         // Create JsonFileDatabaseService if one was not passed in
         if (databaseService == null)
-            databaseService = new JsonFileDatabaseService<List<Friend>>("data.json");
+            databaseService = new JsonFileDatabaseService("data.json");
         
         // Register our IDatabaseService
         builder.Services.AddSingleton(databaseService);

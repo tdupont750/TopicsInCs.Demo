@@ -1,8 +1,10 @@
+using TopicsInCs.Demo.Social;
+
 namespace TopicsInCs.Demo.Data;
 
-public interface IDatabaseService<T>
+public interface IDatabaseService
 {
-    T Load();
+    List<Friend> LoadFriends();
     
-    void Save(T data);
+    void SaveFriends(List<Friend> data);
 }

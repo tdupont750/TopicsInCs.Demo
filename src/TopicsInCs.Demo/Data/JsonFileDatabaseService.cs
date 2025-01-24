@@ -1,8 +1,9 @@
 using System.Text.Json;
+using TopicsInCs.Demo.Social;
 
 namespace TopicsInCs.Demo.Data;
 
-public class JsonFileDatabaseService<T> : IDatabaseService<T>
+public class JsonFileDatabaseService : IDatabaseService
 {
     private readonly string _filePath;
 
@@ -11,7 +12,7 @@ public class JsonFileDatabaseService<T> : IDatabaseService<T>
         _filePath = filePath;
     }
 
-    public T Load()
+    public List<Friend> LoadFriends()
     {
         EnsureFileExists();
         var json = File.ReadAllText(_filePath);
@@ -19,10 +20,10 @@ public class JsonFileDatabaseService<T> : IDatabaseService<T>
         if (string.IsNullOrEmpty(json))
             return default;
         
-        return JsonSerializer.Deserialize<T>(json);
+        return JsonSerializer.Deserialize<List<Friend>>(json);
     }
     
-    public void Save(T data)
+    public void SaveFriends(List<Friend> data)
     {
         EnsureFileExists();
         

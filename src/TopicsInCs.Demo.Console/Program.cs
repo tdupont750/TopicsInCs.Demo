@@ -15,7 +15,7 @@ public static class Program
         
         try
         {
-            var databaseService = new JsonFileDatabaseService<List<Friend>>("demo.json");
+            var databaseService = new JsonFileDatabaseService("demo.json");
             var friendListService = new FriendListService(databaseService);
             var exitCode = ExecuteCommand(friendListService, args);
             System.Console.WriteLine($"ExitCode: {exitCode}");  
